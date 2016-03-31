@@ -1,0 +1,157 @@
+.icon {
+  max-width: 150px;
+  margin: 0 auto;
+  display: block;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar-default .navbar-brand {
+    padding: 15px 15px 15px 30px;
+    color: #0B94D8;
+}
+
+.btn-info {
+    background-color: #0B94D8;
+}
+
+/* default container */
+
+/* intro container */
+
+.intro-container {
+    background-image: url('../img/1.jpg');
+    background-position: center center;
+    background-size: cover;
+    height: 250px;
+    padding: 30px;
+    text-align: center;
+}
+
+.intro-container .title {
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: #0B94D8;
+}
+
+.intro-container .intro {
+    color: #000000;
+}
+
+.intro-container button {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 50px;
+}
+
+/* res container */
+
+.res-container {
+    padding: 30px
+}
+
+/* end default container */
+
+/* search container */
+
+.search-container{
+    margin-bottom: 15px;
+}
+
+.searched_question {
+    margin-bottom: 10px;
+}
+
+.searched_question .glyphicon-circle-arrow-right {
+    color: #0B94D8;
+}
+
+.searched_question .glyphicon-pencil {
+    color: #5cb85c;
+}
+
+.searched_question .glyphicon-remove {
+    color: red;
+}
+
+
+
+#pollres-container,
+#votepoll-container {
+    top: 150px;
+}
+
+#pollres-container .modal-content,
+#votepoll-container .modal-content {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#view_chart_button,
+#view_table_button,
+#vote_poll_button
+{
+    padding: 6px 50px; 
+    float: right;
+}
+
+#chart_div table {
+    width: auto;
+    margin: 0 auto !important;
+}
+
+
+/* signup/login container */
+
+#signup button {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 50px;
+}
+
+#login button {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 50px;
+}
+
+/* end signup/login container */
+
+/* new poll */
+
+#newPoll .btn-info {
+ background-color: #FFFFFF;   
+ color: black;
+ border-color: #adadad;
+}
+
+#newPoll .btn-info:hover {
+    color: #333;
+    background-color: #ebebeb;
+    border-color: #adadad;
+}
+
+#newPoll .form-inline input {
+    width: 93%;
+    display: inline;
+}
+
+#delete_button,
+#close_button,
+.searched_question  .glyphicon {
+    cursor: pointer;
+}
+
+#newPoll button {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 50px;
+}
+
+/* end new poll */
