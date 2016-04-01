@@ -26,7 +26,7 @@
     background-position: center center;
     background-size: cover;
     height: 250px;
-    padding: 30px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -47,14 +47,6 @@
     font-size: 16px;
     padding: 6px 50px;
 }
-
-/* res container */
-
-.res-container {
-    padding: 30px
-}
-
-/* end default container */
 
 /* search container */
 
@@ -155,3 +147,18 @@
 }
 
 /* end new poll */
+
+.logo {
+    font-size: 60px;
+    color: #0B94D8;
+}
+
+/*footer*/
+footer {
+    padding: 1px 0;
+    background: rgb(241, 244, 235);
+    height: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

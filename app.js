@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-mongoose.connect(config.database); // connect to database
+//mongoose.connect(config.database); // connect to database
 
 app.set('superSecret', config.secret); // secret variable
 

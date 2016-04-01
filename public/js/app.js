@@ -102,7 +102,7 @@ var userService = function($http, auth, $window) {
 /* Main controller definition */
 
 AppController.$routeConfig = [
-
+    { path: '/', component: 'main', as:'main' }
 ];
 
 function AppController($scope, $router, user, auth, $location) {
