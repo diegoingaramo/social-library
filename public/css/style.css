@@ -162,3 +162,7 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.features-container {
+    padding-top: 60px;
+}
