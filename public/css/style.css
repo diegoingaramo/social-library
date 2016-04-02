@@ -101,6 +101,10 @@
 
 /* signup/login container */
 
+#signup, #login {
+    padding-top: 30px;
+}
+
 #signup button {
     font-weight: bold;
     font-size: 16px;
@@ -166,3 +170,8 @@ footer {
 .features-container {
     padding-top: 60px;
 }
+
+.features-container h4 {
+    color: #0B94D8;
+}
+

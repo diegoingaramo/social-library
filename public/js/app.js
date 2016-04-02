@@ -102,7 +102,9 @@ var userService = function($http, auth, $window) {
 /* Main controller definition */
 
 AppController.$routeConfig = [
-    { path: '/', component: 'main', as:'main' }
+    { path: '/', component: 'main', as:'main' },
+    { path: '/user/login', component: 'user_login', as:'login' },
+    { path: '/user/signup', component: 'user_signup', as:'signup' }
 ];
 
 function AppController($scope, $router, user, auth, $location) {
@@ -125,7 +127,7 @@ function AppController($scope, $router, user, auth, $location) {
 
 /* End main controller definition */
 
-var app = angular.module('appMain', ['ngNewRouter']).controller('AppController', ['$scope', '$router', 'user', 'auth', '$location', AppController]);
+var app = angular.module('appMain', ['ngNewRouter','main','user.signup','user.login']).controller('AppController', ['$scope', '$router', 'user', 'auth', '$location', AppController]);
 
 app.factory('authInterceptor', authInterceptor)
 .service('user', userService)
