@@ -61,14 +61,15 @@ var userService = function($http, auth, $window) {
     
   var self = this;
     
-  self.signup = function(email, password, rpassword) {
+  self.signup = function(name, email, password, rpassword) {
   return $http.post('users/signup', {
+      name: name,
       email: email,
       password: password,
       rpassword: rpassword
     }).then(function(result) {
           if (result.data.success){
-             $window.localStorage.setItem('user',JSON.stringify({username: email}));
+             $window.localStorage.setItem('user',JSON.stringify(result.data.user));
           }
           return result;
       });
@@ -80,7 +81,34 @@ var userService = function($http, auth, $window) {
           password: password
       }).then(function(result) {
           if (result.data.success){
-            $window.localStorage.setItem('user',JSON.stringify({username: email}));
+            $window.localStorage.setItem('user',JSON.stringify(result.data.user));
+          }
+          return result;
+      });
+  };
+    
+    
+  self.saveData = function(user) {
+      return $http.post('users/updateProfile', {
+          id: user._id,
+          city: user.city,
+          state: user.state
+      }).then(function(result) {
+          if (result.data.success){
+            $window.localStorage.setItem('user',JSON.stringify(result.data.user));
+          }
+          return result;
+      });
+  };
+    
+  self.savePassword = function(user) {
+      return $http.post('users/updatePassword', {
+          id: user._id,
+          cPassword: user.cPassword,
+          nPassword: user.nPassword
+      }).then(function(result) {
+          if (result.data.success){
+            $window.localStorage.setItem('user',JSON.stringify(result.data.user));
           }
           return result;
       });
@@ -104,7 +132,8 @@ var userService = function($http, auth, $window) {
 AppController.$routeConfig = [
     { path: '/', component: 'main', as:'main' },
     { path: '/user/login', component: 'user_login', as:'login' },
-    { path: '/user/signup', component: 'user_signup', as:'signup' }
+    { path: '/user/signup', component: 'user_signup', as:'signup' },
+    { path: '/user/profile', component: 'user_profile', as:'profile' },
 ];
 
 function AppController($scope, $router, user, auth, $location) {
@@ -127,7 +156,7 @@ function AppController($scope, $router, user, auth, $location) {
 
 /* End main controller definition */
 
-var app = angular.module('appMain', ['ngNewRouter','main','user.signup','user.login']).controller('AppController', ['$scope', '$router', 'user', 'auth', '$location', AppController]);
+var app = angular.module('appMain', ['ngNewRouter','main','user.signup','user.login','user.profile']).controller('AppController', ['$scope', '$router', 'user', 'auth', '$location', AppController]);
 
 app.factory('authInterceptor', authInterceptor)
 .service('user', userService)

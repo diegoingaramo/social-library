@@ -1,0 +1,24 @@
+<!-- signup page -->
+<section id="profile" class="col-xs-10 col-xs-offset-1 col-sm-offset-1 col-sm-10" ng-controller="UserProfileController">
+                        <h3>UPDATE PROFILE</h3>
+                        <div class="form-group">   
+                          <label for="usr">City</label>
+                          <input type="text" class="form-control" aria-describedby="sizing-addon2" placeholder="Please enter a city" ng-model="user.city">
+                        </div>
+                        <div class="form-group">   
+                          <label for="email">State</label>
+                          <input type="text" class="form-control" aria-describedby="sizing-addon2" placeholder="Please enter a state" ng-model="user.state">
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="saveData()">Save</button>
+    
+                        <br/><br/><br/><h3>CHANGE PASSWORD</h3>
+                        <div class="form-group">   
+                          <label for="usr">Current Password</label>
+                          <input type="password" class="form-control" aria-describedby="sizing-addon2" ng-model="user.cPassword">
+                        </div>
+                        <div class="form-group">   
+                          <label for="email">New Password</label>
+                          <input type="password" class="form-control" aria-describedby="sizing-addon2" ng-model="user.nPassword">
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="savePassword()">Save</button>
+</section>
