@@ -149,6 +149,14 @@ var bookService = function($http) {
           });
   };
     
+  self.allBooks = function(user) {
+      return $http.post('book/allBooks', {
+              email: user.email,
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
   self.save = function(user,bookID,bookTitle,bookAuthors,bookImgUrl) {
       return $http.post('book/saveBook', {
               email: user.email,
@@ -156,6 +164,32 @@ var bookService = function($http) {
               title:bookTitle,
               author:bookAuthors,
               imgUrl:bookImgUrl
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
+    
+  self.saveTrade = function(user,book) {
+      return $http.post('trade/save', {
+              userID: user._id,
+              bookID:book._id
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
+  self.myTrades = function(user) {
+      return $http.post('trade/myTrades', {
+              userID: user._id,
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
+  self.removeTrade = function(trade) {
+      return $http.post('trade/remove', {
+              id: trade._id,
           }).then(function(result) {
               return result;
           });

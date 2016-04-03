@@ -195,3 +195,12 @@ footer {
     width: 128;
     height: 192;
 }
+
+.trade-button{
+    float:right;
+    cursor:pointer;
+}
+
+.request-container{
+    margin-top: 10px;
+}

@@ -11,6 +11,7 @@ var config = require('./config'); // get our config file
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var book = require('./routes/book');
+var trade = require('./routes/trade');
 
 app = express();
 
@@ -34,6 +35,7 @@ app.set('superSecret', config.secret); // secret variable
 app.use('/', routes);
 app.use('/users', users);
 app.use('/book', book);
+app.use('/trade', trade);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

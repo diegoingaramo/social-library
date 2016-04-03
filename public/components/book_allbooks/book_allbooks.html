@@ -1,16 +1,43 @@
 <!-- login page -->
-<section id="allBooks" class="col-sm-offset-1 col-sm-4" ng-controller="BookAllBooksController">
+<section id="myBooks" class="col-sm-offset-1 col-sm-11" ng-controller="BookAllBooksController">
     
-                        <div class="form-group">   
-                          <button type="button" class="btn btn-info btn-sm" style="display:inline">Your trade requests ( outstanding)</button>
-                          <button type="button" class="btn btn-success btn-sm" style="display:inline">Trade requests for you ( unapproved)</button>
+                        <div class="row"> 
+                            <div class="col-sm-1">   
+                                  <div class="btn btn-info btn-sm" ng-click="showRequests = (showRequests)?false:true;">Your trade requests ({{bookRequests.length}} outstanding)</div>
+                            </div>
+                            <div class="col-sm-1 col-sm-offset-2">  
+                                  <div class="btn btn-success btn-sm">Trade requests for you ( unapproved)</div>
+                            </div>
                         </div>
     
-                        <h3>MY BOOKS:</h3>
-                        <hr/>
-                        <div class="form-group">   
-                          <input type="text" class="form-control" placeholder="Please enter the booktitle" aria-describedby="sizing-addon2" id="email" ng-model="email">
-                          <button type="button" class="btn btn-info btn-sm" ng-click="searchMyBook()">Add</button>
+                        <div class="request-container row" ng-show="showRequests"> 
+                            <div class="col-sm-5">   
+                                <h3>YOUR OUTSTANDING REQUESTS:</h3>
+                                <hr/>
+                                <div>   
+                                    <p ng-repeat="book in bookRequests">{{book.bookID.title}}</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="row"> 
+                            <div class="col-sm-4">   
+                                <h3>ALL BOOKS:</h3>
+                                <hr/>
+                                Click the <i class="glyphicon glyphicon-refresh"></i> to request a trade!
+                            </div>
+                        </div>
+    
+                        <div class="row"> 
+                            <div class="col-sm-11">   
+                                <hr/>
+                                <div class="book-container" ng-repeat="book in books">
+                                    <div class="image-container text-center">
+                                        <img class="nav-image book-image" ng-src="{{book.imgUrl}}" title="{{book.title}} - {{book.author}}">
+                                        <span class="trade-button" ng-click="saveTrade(book)"><i class="glyphicon glyphicon-refresh"></i></button></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
 </section>

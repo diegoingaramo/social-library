@@ -10,6 +10,21 @@ var router = express.Router();
 
 router.post('/mybooks', token_service.isAuthenticated, function(req, res) {
     
+    Book.find({owner: {'$ne':req.body.email }, enabled: true}, function(err, books) {
+            
+           if (err) throw err;
+            
+           return res
+                  .status(200)
+                  .send({success: true, books: books});
+
+            
+    });
+        
+});
+
+router.post('/allbooks', token_service.isAuthenticated, function(req, res) {
+    
     Book.find({owner: req.body.email, enabled: true}, function(err, books) {
             
            if (err) throw err;
@@ -22,6 +37,7 @@ router.post('/mybooks', token_service.isAuthenticated, function(req, res) {
     });
         
 });
+
 
 router.post('/saveBook', token_service.isAuthenticated, function(req, res) {
     

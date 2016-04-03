@@ -3,10 +3,20 @@
     
                         <div class="row"> 
                             <div class="col-sm-1">   
-                                  <div class="btn btn-info btn-sm">Your trade requests ( outstanding)</div>
+                                  <div class="btn btn-info btn-sm" ng-click="showRequests = (showRequests)?false:true;">Your trade requests ({{bookRequests.length}} outstanding)</div>
                             </div>
                             <div class="col-sm-1 col-sm-offset-2">  
                                   <div class="btn btn-success btn-sm">Trade requests for you ( unapproved)</div>
+                            </div>
+                        </div>
+    
+                        <div class="request-container row" ng-show="showRequests"> 
+                            <div class="col-sm-5">   
+                                <h3>YOUR OUTSTANDING REQUESTS:</h3>
+                                <hr/>
+                                <div>   
+                                    <p ng-repeat="book in bookRequests">{{book.bookID.title}} <button type="button" class="close" ng-click="removeTrade(book,$index)">×</button></p>
+                                </div>
                             </div>
                         </div>
     
