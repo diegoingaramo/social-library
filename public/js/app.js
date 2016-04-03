@@ -5,7 +5,7 @@ var authInterceptor = function(auth) {
     // automatically attach Authorization header
     request: function(config) {
       var token = auth.getToken();
-      if(token) {
+      if(config.url.indexOf('http')!=0 && token) {
         config.headers.Authorization = 'Bearer ' + token;
       }
       return config;
@@ -13,7 +13,7 @@ var authInterceptor = function(auth) {
 
     // If a token was sent back, save it
     response: function(res) {
-      if(res.data.token) {
+      if(res.config.url.indexOf('http')!=0 && res.data.token) {
         auth.saveToken(res.data.token);
       }
       return res;
@@ -127,6 +127,54 @@ var userService = function($http, auth, $window) {
 
 /* End authentication services */
 
+/* Book service */
+
+var bookService = function($http) {
+    
+  var self = this;
+  var bookSearchUrl = 'https://www.googleapis.com/books/v1/volumes'
+  var key = 'AIzaSyBaaedeK5ybP_NI1gp9rH_acw-WP3jy5vk';
+    
+  self.search = function(query) {
+      return $http.get(bookSearchUrl + '?q=' + query + '&orderBy=relevance&printType=books&projection=lite' + '&key=' + key).then(function(result) {
+              return result;
+          });
+  };
+    
+  self.mybooks = function(user) {
+      return $http.post('book/mybooks', {
+              email: user.email,
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
+  self.save = function(user,bookID,bookTitle,bookAuthors,bookImgUrl) {
+      return $http.post('book/saveBook', {
+              email: user.email,
+              id:bookID,
+              title:bookTitle,
+              author:bookAuthors,
+              imgUrl:bookImgUrl
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
+  self.remove = function(id) {
+      return $http.post('book/removeBook', {
+              id:id,
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
+    
+};
+
+
+/* End book service */
+
 /* Main controller definition */
 
 AppController.$routeConfig = [
@@ -134,6 +182,8 @@ AppController.$routeConfig = [
     { path: '/user/login', component: 'user_login', as:'login' },
     { path: '/user/signup', component: 'user_signup', as:'signup' },
     { path: '/user/profile', component: 'user_profile', as:'profile' },
+    { path: '/user/mybooks', component: 'book_mybooks', as:'mybooks' },
+    { path: '/user/allbooks', component: 'book_allbooks', as:'allbooks' }
 ];
 
 function AppController($scope, $router, user, auth, $location) {
@@ -156,11 +206,12 @@ function AppController($scope, $router, user, auth, $location) {
 
 /* End main controller definition */
 
-var app = angular.module('appMain', ['ngNewRouter','main','user.signup','user.login','user.profile']).controller('AppController', ['$scope', '$router', 'user', 'auth', '$location', AppController]);
+var app = angular.module('appMain', ['ngNewRouter','main','user.signup','user.login','user.profile','book.mybooks','book.allbooks']).controller('AppController', ['$scope', '$router', 'user', 'auth', '$location', AppController]);
 
 app.factory('authInterceptor', authInterceptor)
 .service('user', userService)
 .service('auth', authService)
+.service('book',bookService)
 .config(function($httpProvider) {
   $httpProvider.interceptors.push('authInterceptor');
 });

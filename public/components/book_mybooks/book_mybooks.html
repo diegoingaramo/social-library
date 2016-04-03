@@ -1,0 +1,36 @@
+<!-- login page -->
+<section id="myBooks" class="col-sm-offset-1 col-sm-11" ng-controller="BookMyBooksController">
+    
+                        <div class="row"> 
+                            <div class="col-sm-1">   
+                                  <div class="btn btn-info btn-sm">Your trade requests ( outstanding)</div>
+                            </div>
+                            <div class="col-sm-1 col-sm-offset-2">  
+                                  <div class="btn btn-success btn-sm">Trade requests for you ( unapproved)</div>
+                            </div>
+                        </div>
+    
+                        <div class="row"> 
+                            <div class="col-sm-4">   
+                                <h3>MY BOOKS:</h3>
+                                <hr/>
+                                <div class="">   
+                                  <input type="text" class="form-control" placeholder="Please enter the booktitle" aria-describedby="sizing-addon2" ng-model="search">
+                                  <button type="button" class="btn btn-info btn-sm" style="margin-top: 10px" ng-click="searchMyBook()">Add</button>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="row"> 
+                            <div class="col-sm-11">   
+                                <hr/>
+                                <div class="book-container" ng-repeat="book in books">
+                                    <div class="image-container text-center">
+                                        <img class="nav-image book-image" ng-src="{{book.imgUrl}}" title="{{book.title}} - {{book.author}}">
+                                        <button type="button" class="close" ng-click="removeBook(book._id, $index)">×</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+</section>
