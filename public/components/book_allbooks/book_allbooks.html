@@ -6,7 +6,7 @@
                                   <div class="btn btn-info btn-sm" ng-click="showRequests = (showRequests)?false:true;">Your trade requests ({{bookRequests.length}} outstanding)</div>
                             </div>
                             <div class="col-sm-1 col-sm-offset-2">  
-                                  <div class="btn btn-success btn-sm">Trade requests for you ( unapproved)</div>
+                                  <div class="btn btn-success btn-sm" ng-click="showRequestsForYou = (showRequestsForYou)?false:true;">Trade requests for you ({{bookRequestsForYou.length}} unapproved)</div>
                             </div>
                         </div>
     
@@ -15,7 +15,17 @@
                                 <h3>YOUR OUTSTANDING REQUESTS:</h3>
                                 <hr/>
                                 <div>   
-                                    <p ng-repeat="book in bookRequests">{{book.bookID.title}}</p>
+                                    <p ng-repeat="book in bookRequests" class="status-{{book.status}}">{{book.bookID.title}}</p>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="request-container row" ng-show="showRequestsForYou"> 
+                            <div class="col-sm-5">   
+                                <h3>REQUESTS FROM OTHER USERS:</h3>
+                                <hr/>
+                                <div>   
+                                    <p ng-repeat="book in bookRequestsForYou">{{book.bookID.title}}</p>
                                 </div>
                             </div>
                         </div>

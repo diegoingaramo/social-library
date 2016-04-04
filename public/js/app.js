@@ -187,9 +187,26 @@ var bookService = function($http) {
           });
   };
     
+  self.tradesForYou = function(user) {
+      return $http.post('trade/tradesForYou', {
+              email: user.email,
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
   self.removeTrade = function(trade) {
       return $http.post('trade/remove', {
               id: trade._id,
+          }).then(function(result) {
+              return result;
+          });
+  };
+    
+  self.updateTradeStatus = function(trade,status) {
+      return $http.post('trade/updateTradeStatus', {
+              tradeID: trade._id,
+              status: status
           }).then(function(result) {
               return result;
           });

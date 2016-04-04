@@ -204,3 +204,35 @@ footer {
 .request-container{
     margin-top: 10px;
 }
+
+.ok-forApproval{
+    float: right;
+    left: -35px;
+    color: #DEA1A1;
+    cursor: pointer;
+}
+
+.status-1{
+    background-color: #AAE4AA;
+    border-radius: 6px;
+    border-width: thin;
+    border-style: solid;
+    border-color: #AAE4AA;
+    
+}
+
+.status-0{
+    background-color: white;
+    border-radius: 6px;
+    border-width: thin;
+    border-style: solid;
+    border-color: white;
+}
+
+.status-2{
+    background-color: #E8907C;
+    border-radius: 6px;
+    border-width: thin;
+    border-style: solid;
+    border-color: #E8907C;
+}

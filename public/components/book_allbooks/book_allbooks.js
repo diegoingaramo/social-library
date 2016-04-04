@@ -4,7 +4,8 @@ angular.module('book.allbooks', ['ngNewRouter'])
     //model initialization
     $scope.search = "";
     $scope.books = [];
-    $scope.bookRequests = []; 
+    $scope.bookRequests = [];
+    $scope.bookRequestsForYou = [];
       
     $scope.saveTrade = function(bookDoc) {
        book.saveTrade(user.currentUser(), bookDoc).then(function(result) {       
@@ -37,6 +38,16 @@ angular.module('book.allbooks', ['ngNewRouter'])
         book.myTrades(user.currentUser()).then(function(result) {       
             if (result.data.success){
                 $scope.bookRequests = result.data.trades;
+            }
+            else
+                 bootbox.alert(result.data.message); 
+           }, function(reason) {
+             bootbox.alert("Error: " + reason);
+        });
+        
+        book.tradesForYou(user.currentUser()).then(function(result) {       
+            if (result.data.success){
+                $scope.bookRequestsForYou = result.data.trades;
             }
             else
                  bootbox.alert(result.data.message); 

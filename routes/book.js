@@ -8,7 +8,7 @@ var Book = require('../model/book'); // get our mongoose model
 
 var router = express.Router();
 
-router.post('/mybooks', token_service.isAuthenticated, function(req, res) {
+router.post('/allbooks', token_service.isAuthenticated, function(req, res) {
     
     Book.find({owner: {'$ne':req.body.email }, enabled: true}, function(err, books) {
             
@@ -23,7 +23,7 @@ router.post('/mybooks', token_service.isAuthenticated, function(req, res) {
         
 });
 
-router.post('/allbooks', token_service.isAuthenticated, function(req, res) {
+router.post('/mybooks', token_service.isAuthenticated, function(req, res) {
     
     Book.find({owner: req.body.email, enabled: true}, function(err, books) {
             
@@ -59,8 +59,6 @@ router.post('/saveBook', token_service.isAuthenticated, function(req, res) {
 });
 
 router.post('/removeBook', token_service.isAuthenticated, function(req, res) {
-    
-    console.log(req.body);
     
     Book.findOne({_id: req.body.id}, function(err, book) {
             

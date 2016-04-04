@@ -4,7 +4,8 @@ angular.module('book.mybooks', ['ngNewRouter'])
     //model initialization
     $scope.search = "";
     $scope.books = [];
-    $scope.bookRequests = [];  
+    $scope.bookRequests = [];
+    $scope.bookRequestsForYou = [];
       
     $scope.searchMyBook = function() {
         book.search($scope.search).then(function(result) {       
@@ -46,7 +47,23 @@ angular.module('book.mybooks', ['ngNewRouter'])
             }, function(reason) {
                 bootbox.alert("Error: " + reason);
         });
-    };  
+    };
+      
+    $scope.updateTradeStatus = function(trade, status) {
+        book.updateTradeStatus(trade,status).then(function(result) { 
+            book.tradesForYou(user.currentUser()).then(function(result) {       
+            if (result.data.success){
+                $scope.bookRequestsForYou = result.data.trades;
+            }
+            else
+                 bootbox.alert(result.data.message); 
+           }, function(reason) {
+             bootbox.alert("Error: " + reason);
+            });
+        }, function(reason) {
+            bootbox.alert("Error: " + reason);
+        });
+    };
        
     $scope.init = function() {
         
@@ -63,6 +80,16 @@ angular.module('book.mybooks', ['ngNewRouter'])
         book.myTrades(user.currentUser()).then(function(result) {       
             if (result.data.success){
                 $scope.bookRequests = result.data.trades;
+            }
+            else
+                 bootbox.alert(result.data.message); 
+           }, function(reason) {
+             bootbox.alert("Error: " + reason);
+        });
+        
+        book.tradesForYou(user.currentUser()).then(function(result) {       
+            if (result.data.success){
+                $scope.bookRequestsForYou = result.data.trades;
             }
             else
                  bootbox.alert(result.data.message); 

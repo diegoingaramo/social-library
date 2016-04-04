@@ -24,7 +24,8 @@ router.post('/save', token_service.isAuthenticated, function(req, res) {
             else{
                 var trade = new Trade({
                     requester: new ObjectId(req.body.userID), 
-                    bookID: new ObjectId(req.body.bookID)
+                    bookID: new ObjectId(req.body.bookID),
+                    status: 0
                 });
                 
                 trade.save(function(err,trade){
@@ -56,6 +57,28 @@ router.post('/myTrades', token_service.isAuthenticated, function(req, res) {
     
 });
 
+
+router.post('/tradesForYou', token_service.isAuthenticated, function(req, res) {
+    
+    console.log(req.body.email);
+    
+    Trade.find({status:0}).populate( 'bookID', null, { owner: req.body.email}).exec(function(err, trades) {
+        
+            trades = trades.filter(function(trade){
+                return trade.bookID;
+            });
+            
+           if (err) throw err;
+        
+            return res
+                .status(200)
+                .send({success: true, trades: trades});
+        
+    });
+    
+});
+
+
 router.post('/remove', token_service.isAuthenticated, function(req, res) {
     
     Trade.findOne({_id: req.body.id}).remove(function(err) {
@@ -68,6 +91,30 @@ router.post('/remove', token_service.isAuthenticated, function(req, res) {
     });
         
 });
+
+
+router.post('/updateTradeStatus', token_service.isAuthenticated, function(req, res) {
+
+  // find the user
+  Trade.findOne({_id: req.body.tradeID}, function(err, trade) {
+
+    if (err) throw err;
+
+        trade.status = req.body.status;
+      
+        console.log(trade);
+
+        trade.save(function(err,user){
+            if (err) throw err;
+
+            return res
+                .status(200)
+                .send({success: true, message: ""});
+        });
+  });
+    
+});
+
 
 
 
